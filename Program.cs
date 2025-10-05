@@ -9,94 +9,64 @@ namespace Kodanalys
 
         static void Main(string[] args)
         {
-            bool programHalted = true;
-            while (programHalted)
+
+            Console.WriteLine("Welcome to your diary app");
+            while (true)
             {
-                Console.WriteLine("Välj ett alternativ:");
-                Console.WriteLine("1. Lägg till användare");
-                Console.WriteLine("2. Visa alla användare");
-                Console.WriteLine("3. Ta bort användare");
-                Console.WriteLine("4. Sök användare");
-                Console.WriteLine("5. Avsluta");
-                string input = Console.ReadLine(); //konstig variabel
-
-
-                switch (input)
+                try
                 {
-                    case "1":
-                        Console.Write("Ange namn: ");
-                        string user = Console.ReadLine();
-                        if (magicConstant < 10)
-                        {
-                            celestialWhispers[magicConstant] = user; //konstig variabel
-                            magicConstant++;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Listan är full!");
-                        }
-                        break;
-                    case "2":
-                        Console.WriteLine("Användare:");
-                        for (int i = 0; i < magicConstant; i++)
-                        {
-                            Console.WriteLine(celestialWhispers[i]);
-                        }
-                        break;
-                    case "3":
-                        Console.Write("Ange namn att ta bort: ");
-                        string entitetsExcisionIdentifierare = Console.ReadLine();
-                        int nanoBanana = -1; //konstig variabel
-                        for (int i = 0; i < magicConstant; i++)
-                        {
-                            if (celestialWhispers[i] == entitetsExcisionIdentifierare)
-                            {
-                                nanoBanana = i;
-                                break;
-                            }
-                        }
-                        if (nanoBanana != -1)
-                        {
-                            for (int i = nanoBanana; i < magicConstant - 1; i++)
-                            {
-                                celestialWhispers[i] = celestialWhispers[i + 1];
-                            }
-                            magicConstant--;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Användaren hittades inte.");
-                        }
-                        break;
-                    case "4":
-                        Console.Write("Ange namn att söka: "); //konstig ux
-                        string nebulousQuery = Console.ReadLine();
-                        bool f00l = false;
-                        for (int i = 0; i < magicConstant; i++)
-                        {
-                            if (celestialWhispers[i] == nebulousQuery) //konstig variabel
-                            {
-                                f00l = true; //konstig variabel
-                                break;
-                            }
-                        }
-                        if (f00l)
-                        {
-                            Console.WriteLine("Användaren finns i listan.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Användaren hittades inte.");
-                        }
-                        break;
-                    case "5":
-                        programHalted = false;
-                        break;
-                    default:
-                        Console.WriteLine("Ogiltigt val.");
-                        break;
+                    Console.WriteLine("");
+                    Console.WriteLine("1. Lägg till användare");
+                    Console.WriteLine("2. Visa alla användare");
+                    Console.WriteLine("3. Ta bort en användare");
+                    Console.WriteLine("4. Sök efter en användare");
+                    Console.WriteLine("5. Avsluta");
+
+
+                    MenuChoice choice = GetMenuChoice();
+                    switch (choice)
+                    {
+                        case MenuChoice.AddUser:
+                            Console.WriteLine("");
+                            Console.WriteLine("Lägger till en ny användare");
+                            AddUser();
+                            break;
+                        case MenuChoice.ViewUsers:
+                            Console.WriteLine("");
+                            ViewUsers();
+                            break;
+                        case MenuChoice.RemoveUser:
+                            Console.WriteLine("");
+                            Console.WriteLine("Välj en användare att ta bort");
+                            RemoveUser();
+                            break;
+
+                        case MenuChoice.SearchUser:
+                            Console.WriteLine("");
+                            Console.WriteLine("Sök efter en användare");
+                            SearchUser();
+                            break;
+
+
+                        case MenuChoice.Exit:
+                            Console.WriteLine("");
+                            Console.WriteLine("Avsluta programmet");
+                            return;
+                        default:
+                            Console.WriteLine("");
+                            Console.WriteLine("inte ett menyval");
+                            break;
+                    }
+
+
                 }
-                
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                    Console.WriteLine("Tryck på en knapp för att fortsätta");
+                    Console.ReadKey(true);
+                }
+
             }
         }
     }
