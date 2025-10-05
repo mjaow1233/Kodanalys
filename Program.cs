@@ -4,7 +4,7 @@ namespace Kodanalys
 {
     class Program
     {
-            private static readonly User user = new User();
+        private static readonly User user = new User();
 
         static void Main(string[] args)
         {
@@ -32,12 +32,12 @@ namespace Kodanalys
                             break;
                         case MenuChoice.ViewUsers:
                             Console.WriteLine("");
-                           /*user.ViewUsers();*/
+                            user.ViewUsers();
                             break;
                         case MenuChoice.RemoveUser:
                             Console.WriteLine("");
                             Console.WriteLine("Välj en användare att ta bort");
-                           /* RemoveUser();*/
+                            user.RemoveUser();
                             break;
 
                         case MenuChoice.SearchUser:
