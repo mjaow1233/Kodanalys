@@ -25,9 +25,7 @@ namespace Kodanalys
                     MenuChoice choice = GetMenuChoice();
                     switch (choice)
                     {
-                        case MenuChoice.AddUser:
-                            Console.WriteLine("");
-                            Console.WriteLine("Lägger till en ny användare");
+                        case MenuChoice.AddUser:                       
                             user.AddUser();
                             break;
                         case MenuChoice.ViewUsers:

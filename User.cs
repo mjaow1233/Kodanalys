@@ -6,57 +6,90 @@ namespace Kodanalys
 {
     public class User
     {
-        private readonly List<string> users = new List<string>();
+        private readonly List<String> users = new List<string>();
         private const int MaxUsers = 10;
 
         public void AddUser()
         {
-            Console.Write("Ange namn: ");
-            string? name = Console.ReadLine()?.Trim();
+            string? name;
+            bool validNameEntered = false;
 
-            if (string.IsNullOrEmpty(name))
+            while (!validNameEntered)
             {
-                Console.WriteLine("Skriv in ett namn");
-                return;
+                Console.Write("Ange namn: ");
+                name = Console.ReadLine()?.Trim();
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    Console.WriteLine("Namnet kan inte vara tomt. Försök igen.");
+                    continue;
+                }
+
+                if (users.Count >= MaxUsers)
+                {
+                    Console.WriteLine($"Max antal användare ({MaxUsers}) är nått.");
+                    return;
+                }
+
+                if (users.Any(u => u.Equals(name, StringComparison.OrdinalIgnoreCase)))
+                {
+                    Console.WriteLine($"Användaren '{name}' finns redan. Försök igen.");
+                    continue;
+                }
+
+                users.Add(name);
+                Console.WriteLine($"Användaren '{name}' har lagts till.");
+                validNameEntered = true;
             }
 
-            if (users.Count >= MaxUsers)
-            {
-                Console.WriteLine("Max antal användare nått.");
-                return;
-            }
 
-            if (users.Any(u => u.Equals(name, StringComparison.OrdinalIgnoreCase))) //använder listan och ser även till att versaler/gemener inte bråkar
-            {
-                Console.WriteLine("Användaren finns redan.");
-                return;
-            }
 
-            users.Add(name);
-            Console.WriteLine($"Användaren '{name}' har lagts till.");
         }
+
+
+
 
         public void SearchUser()
         {
-            Console.Write("Ange namn att söka efter");
-            string? name = Console.ReadLine()?.Trim();
-            if (string.IsNullOrEmpty(name))
+            while (true)
             {
-                Console.WriteLine("Kan inte vara tomt");
-                return;
-            }
+                Console.Write("Ange namn att söka efter ");
+                string? input = Console.ReadLine()?.Trim();
 
-            bool found = users.Any(u => u.Equals(name, StringComparison.OrdinalIgnoreCase));
-            if (found)
-                Console.WriteLine("Användaren finns i listan.");
-            else
-                Console.WriteLine("Användaren hittades inte.");
+                if (string.IsNullOrEmpty(input))
+                {
+                    Console.WriteLine("Namnet kan inte vara tomt. Försök igen.");
+                    continue;
+                }
+
+                var matches = users
+                    .Where(u => u.Contains(input, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                if (matches.Count > 0)
+                {
+                    Console.WriteLine("Resultat:");
+                    foreach (var match in matches)
+                    {
+                        Console.WriteLine($"- {match}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Inga användare hittades i sökningen");
+                }
+
+                break;
+            }
         }
 
 
         public void RemoveUser()
         {
             ViewUsers();
+            if (users.Count == 0)
+                return;
+
             Console.Write("Ange numret på användaren att ta bort: ");
             string? input = Console.ReadLine();
 
@@ -66,9 +99,20 @@ namespace Kodanalys
                 return;
             }
 
-            string removedUser = users[number - 1];
-            users.RemoveAt(number - 1);
-            Console.WriteLine($"Användaren '{removedUser}' har tagits bort.");
+            string userToRemove = users[number - 1];
+
+            Console.Write($"Är du säker på att du vill ta bort '{userToRemove}'? (j/n): ");
+            string? confirm = Console.ReadLine()?.Trim().ToLower();
+
+            if (confirm == "j")
+            {
+                users.RemoveAt(number - 1);
+                Console.WriteLine($"Användaren '{userToRemove}' har tagits bort.");
+            }
+            else
+            {
+                Console.WriteLine("Borttagning avbruten.");
+            }
         }
 
 
