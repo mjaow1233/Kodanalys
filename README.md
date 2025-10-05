@@ -1,36 +1,26 @@
-# Kodanalys och förbättring
+Under programmering grund har jag lÃ¤rt mig grunder i C# som skulle kÃ¤nts omÃ¶jliga att fÃ¶rstÃ¥ vid kursens bÃ¶rjan. Trots det Ã¤r det mycket kan jag tÃ¤nka pÃ¥ som sjÃ¤lvklart i efterhand; till exempel att tydlig kod med olika understrukturer (som klasser) gÃ¶r det enklare att arbeta med eller att kunna Ã¥teranvÃ¤nda samma kod mÃ¥ste vara bÃ¤ttre Ã¤n att ha flera upplagor av den.
+Kursen gett mig verktygen att utfÃ¶ra detta och visat mÃ¥nga bra lÃ¶sningar, kombinationer och valmÃ¶jligheter.
 
-## ?? Syfte
-Syftet med denna uppgift är att träna på att analysera befintlig kod, identifiera brister och förbättringsmöjligheter samt reflektera över hur förbättringarna påverkar kodens kvalitet, läsbarhet och underhållbarhet.
+GÃ¤llande min inlÃ¤mningsuppgift; 
+Identifiera tre "Problem";
 
-För VG ska studenten visa förmåga att självständigt analysera och utvärdera programmet samt motivera och genomföra förbättringar.
+A. Inkonsekventa/felstavade/svÃ¥rfÃ¶rstÃ¥eliga eller vilseledande rader/metoder/variabler. SvÃ¥ra att rÃ¤tta/bygga vidare pÃ¥ fÃ¶rmodligen bÃ¥de fÃ¶r skaparen och andra granskare. GÃ¶r det extra svÃ¥rt att gÃ¶ra kodbasen Ã¤nnu mer komplex ifall det fortsÃ¤tter. FÃ¶rutom det Ã¤r "class program" skrivet med liten bokstav vilket kan orsaka kompileringsfel.
 
-## ?? Uppgift
-Du får en färdig C#-applikation (console-app) som innehåller flera medvetna brister:
-- Dåliga namn på variabler och metoder
-- Duplicerad kod
-- Bristande användning av samlingsklasser
-- Onödigt komplicerade if/else-satser
-- Inkonsekvent kodstil
+B. OnÃ¶digt nÃ¤stlade if-satser. OnÃ¶dig komplexitet som gÃ¶r det frustrerande att fÃ¶rstÃ¥ och bygga pÃ¥.
 
-### Din uppgift
-1.  **Analysera koden**
-    - Beskriv de största problemen du identifierar (minst 3).
-    - Förklara varför dessa är problem, kopplat till principer för god kodkvalitet (ex. läsbarhet, DRY, enkelhet, underhållbarhet).
-2.  **Föreslå förbättringar**
-    - Ge konkreta förslag på hur koden kan förbättras.
-    - Motivera varför dina förslag gör koden bättre.
-3.  **Genomför förbättringarna**
-    - Refaktorera koden i Visual Studio.
-    - Använd Git för versionshantering och gör minst 3 separata commits där du beskriver vad som förbättras i varje steg.
-4.  **Reflektera**
-    - Skriv en kort text (1 A4- sida) där du sammanfattar vad du har lärt dig.
-    - Förklara hur dina förbättringar bidrar till att koden blir tydligare och mer lättunderhållen.
+C. Ingen separation fÃ¶r olika delarna av programmet. GÃ¶r det Ã¥terigen svÃ¥rare att fÃ¶rstÃ¥ de olika funktionerna men Ã¤ven att bygga pÃ¥ dem.
 
-## ? Bedömning
-- **Godkänt (G):** Studenten identifierar problem i koden, föreslår och genomför rimliga förbättringar, samt använder Git korrekt för att dokumentera sitt arbete.
-- **Väl godkänt (VG):** Studenten analyserar koden på djupet, identifierar både syntaktiska och strukturella problem, motiverar förbättringarna väl och visar förmåga att reflektera över hur ändringarna påverkar långsiktig kodkvalitet.
+BerÃ¤tta hur du har Ã¤ndrat dem;
+Det fÃ¶rsta steget var att fÃ¶rsÃ¶ka fÃ¶rstÃ¥ vad programmet faktiskt gÃ¶r och vilka avgrÃ¤nsningar som finns. 
+En enkel beskrivning Ã¤r att programmet hanterar anvÃ¤ndare och en inbyggd begrÃ¤nsning verkar vara att det inte ska finnas fler Ã¤n tio anvÃ¤ndare.
 
-## ?? Inlämning
-- Länk till ditt GitHub-repo med den refaktorerade koden (med commits).
-- En kort skriftlig rapport (PDF eller README i repot) med analys, förbättringsförslag och reflektion.
+Efter det gjorde jag lite arbete i att fÃ¶rsÃ¶ka "stÃ¤da upp" variabler och metoder, men bestÃ¤mde mig fÃ¶r att det Ã¤r lÃ¤ttare att skriva om dem istÃ¤llet. Detta skulle gÃ¶ra det enklare att implementera mer sortering av logiken. Menyvalen var statiska sÃ¥ jag skrev ut dessa till en Enum som jag kallade fÃ¶r MenuChoice.cs och logiken placerade jag i en fil kallad user.cs.
+
+Jag implementerade List istÃ¤llet som ersÃ¤ttning fÃ¶r att skriva ut arrayer och istÃ¤llet fÃ¶r att matcha en string till sÃ¶kfunktionen  byggde jag om den sÃ¥ att det gick att hitta anvÃ¤ndare pÃ¥ bara en del av namnet.
+FÃ¶rutom det har jag lagt till ett gÃ¤ng felhanteringar fÃ¶r olika typer av input som inte matchar vad programmet Ã¤r gjort fÃ¶r. 
+
+Ifall en vill uppdatera programmet antingen med en fix eller mer funktioner Ã¤r det numera lÃ¤tt att hitta vart man ska titta. I user finns till exempel AddUser dÃ¤r hela flÃ¶det fÃ¶r den funktionen finns att titta pÃ¥. Innan var den en nÃ¤stlad if sats som bÃ¥de var knepig och hitta men innebar en viss risk att Ã¤ndra pÃ¥ eftersom det pÃ¥verkade hela flÃ¶det av andra funktioner.
+
+
+
+Ifall jag hade mer tid med den hÃ¤r koden skulle jag fÃ¶rmodligen lagt till funktionen att spara anvÃ¤ndarna i en .txt fil eller liknande. Just nu sparas bara informationen sÃ¥ fort programmet kÃ¶rs. Vidare skulle jag fÃ¶rsÃ¶kt samla validering och felhantering och annat pÃ¥ ett stÃ¤lle fÃ¶r att inte behÃ¶va repetera den koden. FÃ¶rmodligen sett till sÃ¥ att user inte sysslar med consolen. Det blir nog bÃ¤ttre ifall det handskas med i program. Sist men inte minst hade det nog vart vÃ¤rt med autentisering och kanske domÃ¤nklasser fÃ¶r olika anvÃ¤ndare. 
