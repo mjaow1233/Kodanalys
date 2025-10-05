@@ -4,13 +4,12 @@ namespace Kodanalys
 {
     class Program
     {
-        static string[] celestialWhispers = new string[10]; //konstiga konstanter
-        static int magicConstant = 0;
+            private static readonly User user = new User();
 
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Welcome to your diary app");
+            Console.WriteLine("Användarhantering");
             while (true)
             {
                 try
@@ -29,22 +28,22 @@ namespace Kodanalys
                         case MenuChoice.AddUser:
                             Console.WriteLine("");
                             Console.WriteLine("Lägger till en ny användare");
-                            AddUser();
+                            user.AddUser();
                             break;
                         case MenuChoice.ViewUsers:
                             Console.WriteLine("");
-                            ViewUsers();
+                           /*user.ViewUsers();*/
                             break;
                         case MenuChoice.RemoveUser:
                             Console.WriteLine("");
                             Console.WriteLine("Välj en användare att ta bort");
-                            RemoveUser();
+                           /* RemoveUser();*/
                             break;
 
                         case MenuChoice.SearchUser:
                             Console.WriteLine("");
                             Console.WriteLine("Sök efter en användare");
-                            SearchUser();
+                            user.SearchUser();
                             break;
 
 
@@ -65,6 +64,15 @@ namespace Kodanalys
                     Console.WriteLine($"Error: {ex.Message}");
                     Console.WriteLine("Tryck på en knapp för att fortsätta");
                     Console.ReadKey(true);
+                }
+                static MenuChoice GetMenuChoice()
+                {
+                    string? input = Console.ReadLine();
+                    if (int.TryParse(input, out int num) && Enum.IsDefined(typeof(MenuChoice), num))
+                    {
+                        return (MenuChoice)num;
+                    }
+                    return MenuChoice.Invalid;
                 }
 
             }
