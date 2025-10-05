@@ -52,27 +52,25 @@ namespace Kodanalys
             else
                 Console.WriteLine("Användaren hittades inte.");
         }
+
+
         public void RemoveUser()
         {
-            Console.Write("Ange namn att ta bort: ");
-            string? name = Console.ReadLine()?.Trim();
+            ViewUsers();
+            Console.Write("Ange numret på användaren att ta bort: ");
+            string? input = Console.ReadLine();
 
-            if (string.IsNullOrEmpty(name))
+            if (!int.TryParse(input, out int number) || number < 1 || number > users.Count)
             {
-                Console.WriteLine("Namnet kan inte vara tomt.");
+                Console.WriteLine("Ogiltigt nummer.");
                 return;
             }
-            int index = users.FindIndex(u => u.Equals(name, StringComparison.OrdinalIgnoreCase));
-            if (index >= 0)
-            {
-                users.RemoveAt(index);
-                Console.WriteLine($"Användaren '{name}' har tagits bort.");
-            }
-            else
-            {
-                Console.WriteLine("Användaren hittades inte.");
-            }
+
+            string removedUser = users[number - 1];
+            users.RemoveAt(number - 1);
+            Console.WriteLine($"Användaren '{removedUser}' har tagits bort.");
         }
+
 
         public void ViewUsers()
         {
