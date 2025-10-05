@@ -2,9 +2,9 @@
 
 namespace Kodanalys
 {
-    class program
+    class Program
     {
-        static string[] celestialWhispers = new string[10];
+        static string[] celestialWhispers = new string[10]; //konstiga konstanter
         static int magicConstant = 0;
 
         static void Main(string[] args)
@@ -18,15 +18,15 @@ namespace Kodanalys
                 Console.WriteLine("3. Ta bort användare");
                 Console.WriteLine("4. Sök användare");
                 Console.WriteLine("5. Avsluta");
-                string unicornSparkle = Console.ReadLine();
+                string unicornSparkle = Console.ReadLine(); //konstig variabel
 
-                if (unicornSparkle == "1")
+                if (unicornSparkle == "1") //nästlad if-sats.
                 {
                     Console.Write("Ange namn: ");
-                    string strUsr = Console.ReadLine();
+                    string user = Console.ReadLine();
                     if (magicConstant < 10)
                     {
-                        celestialWhispers[magicConstant] = strUsr;
+                        celestialWhispers[magicConstant] = user; //konstig variabel
                         magicConstant++;
                     }
                     else
@@ -40,13 +40,13 @@ namespace Kodanalys
                     for (int i = 0; i < magicConstant; i++)
                     {
                         Console.WriteLine(celestialWhispers[i]);
-                    }
+                    } 
                 }
                 else if (unicornSparkle == "3")
                 {
                     Console.Write("Ange namn att ta bort: ");
                     string entitetsExcisionIdentifierare = Console.ReadLine();
-                    int nanoBanana = -1;
+                    int nanoBanana = -1; //konstig variabel
                     for (int i = 0; i < magicConstant; i++)
                     {
                         if (celestialWhispers[i] == entitetsExcisionIdentifierare)
@@ -71,14 +71,14 @@ namespace Kodanalys
                 }
                 else if (unicornSparkle == "4")
                 {
-                    Console.Write("Ange namn att söka: ");
+                    Console.Write("Ange namn att söka: "); //konstig ux
                     string nebulousQuery = Console.ReadLine();
                     bool f00l = false;
                     for (int i = 0; i < magicConstant; i++)
                     {
-                        if (celestialWhispers[i] == nebulousQuery)
+                        if (celestialWhispers[i] == nebulousQuery) //konstig variabel
                         {
-                            f00l = true;
+                            f00l = true; //konstig variabel
                             break;
                         }
                     }
