@@ -13,7 +13,7 @@ A. Inkonsekventa/felstavade/svårförståeliga eller vilseledande rader/metoder/
 B. Onödigt nästlade if-satser. Onödig komplexitet som gör det frustrerande att förstå och bygga på.
 
 
-C. Ingen separation för olika delarna av programmet. Gör det återigen svårare att förstå de olika funktionerna men även att bygga på dem.
+C. Ingen separation för olika delarna av programmet (förutom en user.cs i models). Gör det återigen svårare att förstå de olika funktionerna men även att bygga på dem.
 
 
 Berätta hur du har ändrat dem;
